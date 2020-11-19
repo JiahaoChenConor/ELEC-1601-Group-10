@@ -85,7 +85,6 @@ void setup()
     }
 
 
-    //!!!!!!!!!!!!!!!!!!!
     servoLeft.attach(13);               // Attach left signal to pin 13
     servoRight.attach(12);              // Attach right signal to pin 12
 }
@@ -128,57 +127,8 @@ void autoNavigation()
         route.add(3);
     }
 
-    
-
-// 如果旁边两个不足以覆盖
-//    if (L == 1 && R == 1){
-//        goStraight();
-//        route.add(0);
-//  
-//      
-//    }else if(L == 1 && R == 0){
-//        goLeft();
-//        route.add(2);
-//  
-//        
-//    }else if (L == 0 && R == 1){
-//        goRight();
-//        route.add(1);
-//        
-//  
-//    }else if (L == 0 && R == 0){
-//        goBack();
-//        route.add(3);
-//        
-//    }
-
-
-
-
-//// 如果我们tmd只用左边和中间的检测
-//    if (L == 0 && C == 0 && R == 0){
-//      route.add(8);
-//      state = MANUAL;
-//    }
-//    if (L == 0 && C == 0){
-//        goStraight();
-//        route.add(0);
-//      
-//    }else if(L == 0 && C == 1){
-//        goLeft();
-//        route.add(1);
-//        
-//    }else if (L == 1 && C == 0){
-//        goRight();
-//        route.add(2);
-//  
-//    }else if (L == 1 && C == 1){
-//        goBack();
-//        route.add(3);
-//    }
 
 }
-
 
 
 void returnReverse()
@@ -198,9 +148,8 @@ void returnReverse()
               break;
           case -8:
               state = MANUAL;
-              break;// 可去？？
+              break;
         } 
-//        delay(500);
     }   
 }
 
@@ -226,9 +175,8 @@ void returnForward()
               break;
             case 8:
               state = MANUAL;
-              break;// 可去？
+              break;
         }
-//        delay(500);
     }
 }
 
@@ -282,25 +230,22 @@ void loop()
               Serial.print(recvChar);
               if (recvChar == 'w'){
                 goStraight();
-                
                 route.add(0);
               }else if (recvChar == 'a'){
                 goLeft();
-                
                 route.add(1);
+                
               }else if (recvChar == 'd'){
                 goRight();
-                
                 route.add(2);
+                
               }else if (recvChar == 's'){
                 goBack();
-              
                 route.add(3);
               }
-//              }else if (recvChar == 'x'){
-//                stop();
-//            
-              stopM();
+              // Stop
+               servoLeft.writeMicroseconds(1500);  
+               servoRight.writeMicroseconds(1500); 
           }
 
           
@@ -333,9 +278,6 @@ void loop()
 
 void goLeft()
 {   
-//     // Turn left in place
-//    servoLeft.writeMicroseconds(1300);
-//    servoRight.writeMicroseconds(1300);
 
     // Pivot forward-left
  servoLeft.writeMicroseconds(1500);   // Left wheel stop
@@ -361,9 +303,6 @@ void goLeftR()
 
 void goRight()
 {
-
-//    servoLeft.writeMicroseconds(1700);
-//    servoRight.writeMicroseconds(1700);
 
      // Pivot forward-right
     servoLeft.writeMicroseconds(1700);   // Left wheel counterclockwise
